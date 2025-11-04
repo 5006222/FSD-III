@@ -1,0 +1,134 @@
+1
+
+
+import './App.css';
+import { useState } from 'react';
+
+function App() {
+  const [showMessage, setShowMessage] = useState(false);
+
+  return (
+    <div style={{ textAlign: 'center', color: 'red', marginTop: '50px' }}>
+      <h1>Toggle App</h1>
+
+      <button onClick={() => setShowMessage(!showMessage)}>
+        {showMessage ? 'Hide Message' : 'Show Message'}
+      </button>
+
+      {showMessage && <p>Hiiiii</p>}
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+Q2
+
+
+// ==========================================
+// # app.module.ts
+// ==========================================
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+
+// ==========================================
+// # app.component.ts
+// ==========================================
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  num1: number = 0;
+  num2: number = 0;
+  result: number | string = '';
+
+  add() {
+    this.result = this.num1 + this.num2;
+  }
+
+  subtract() {
+    this.result = this.num1 - this.num2;
+  }
+
+  multiply() {
+    this.result = this.num1 * this.num2;
+  }
+
+  divide() {
+    if (this.num2 === 0) {
+      this.result = 'Cannot divide by zero';
+    } else {
+      this.result = this.num1 / this.num2;
+    }
+  }
+}
+
+
+// ==========================================
+// <!-- app.component.html -->
+// ==========================================
+/*
+<div class="container">
+  <h2>Simple Calculator</h2>
+
+  <input type="number" [(ngModel)]="num1" placeholder="Enter number 1" /> <br />
+  <input type="number" [(ngModel)]="num2" placeholder="Enter number 2" /> <br /><br />
+
+  <button (click)="add()">Add</button>
+  <button (click)="subtract()">Subtract</button>
+  <button (click)="multiply()">Multiply</button>
+  <button (click)="divide()">Divide</button>
+
+  <h3 *ngIf="result !== ''">Result: {{ result }}</h3>
+</div>
+*/
+
+
+// ==========================================
+// /* app.component.css */
+// ==========================================
+/*
+.container {
+  text-align: center;
+  margin-top: 40px;
+  font-family: Arial;
+}
+
+input {
+  margin: 5px;
+  padding: 5px;
+  width: 180px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+h3 {
+  margin-top: 20px;
+}
+*/
+
+
+
