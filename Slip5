@@ -1,0 +1,157 @@
+Q1
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  const currentHours=new Date().getHours();
+  let greetings=('');
+  if(currentHours<12){
+    greetings="GM";
+  }else if(currentHours<18){
+    greetings="GA";
+  }else{
+    greetings="GN";
+  }
+  return (
+    <div>
+      {greetings}
+    </div>
+  );
+}
+
+export default App;
+
+Q2
+
+
+// ==========================================
+// # app.module.ts
+// ==========================================
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { ProductComponent } from './product.component';
+
+@NgModule({
+  declarations: [AppComponent, ProductComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+
+// ==========================================
+// # app.component.ts (Parent Component)
+// ==========================================
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  products = [
+    {
+      name: 'Laptop',
+      price: 55000,
+      image: 'https://via.placeholder.com/150?text=Laptop'
+    },
+    {
+      name: 'Mobile',
+      price: 25000,
+      image: 'https://via.placeholder.com/150?text=Mobile'
+    },
+    {
+      name: 'Headphones',
+      price: 1500,
+      image: 'https://via.placeholder.com/150?text=Headphones'
+    }
+  ];
+}
+
+
+// ==========================================
+// <!-- app.component.html -->
+// ==========================================
+/*
+<div class="container">
+  <h2>Product List</h2>
+
+  <div class="product-list">
+    <app-product
+      *ngFor="let p of products"
+      [name]="p.name"
+      [price]="p.price"
+      [image]="p.image"
+    ></app-product>
+  </div>
+</div>
+*/
+
+
+// ==========================================
+// /* app.component.css */
+// ==========================================
+/*
+.container {
+  text-align: center;
+  font-family: Arial;
+  margin-top: 20px;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+*/
+
+
+// ==========================================
+// # product.component.ts (Child Component)
+// ==========================================
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css']
+})
+export class ProductComponent {
+  @Input() name: string = '';
+  @Input() price: number = 0;
+  @Input() image: string = '';
+}
+
+
+// ==========================================
+// <!-- product.component.html -->
+// ==========================================
+/*
+<div class="card">
+  <img [src]="image" alt="{{ name }}" />
+  <h3>{{ name }}</h3>
+  <p>Price: ₹{{ price }}</p>
+</div>
+*/
+
+
+// ==========================================
+// /* product.component.css */
+// ==========================================
+/*
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 150px;
+  text-align: center;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
+*/
