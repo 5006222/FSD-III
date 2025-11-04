@@ -1,0 +1,105 @@
+Q1)
+
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [showMessage, setShowMessage] = useState(false);
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h2>Hidden Message App</h2>
+
+      <button onClick={() => setShowMessage(!showMessage)}>
+        {showMessage ? "Hide Message" : "Show Message"}
+      </button>
+
+      {showMessage && <p>🎉 Surprise! This is your hidden message.</p>}
+    </div>
+  );
+}
+
+export default App;
+
+//css
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: green;
+}
+
+
+Q2)
+
+app.html 
+
+<div class="container">
+  <h2>Student Registration</h2>
+
+  <form #regForm="ngForm" (ngSubmit)="onSubmit(regForm)">
+    <label>Name:</label><br />
+    <input type="text" name="name" [(ngModel)]="student.name" required /><br />
+    <span *ngIf="regForm.submitted && !student.name" class="error">Name is required</span><br />
+
+    <label>Email:</label><br />
+    <input type="email" name="email" [(ngModel)]="student.email" required email /><br />
+    <span *ngIf="regForm.submitted && !student.email" class="error">Email is required</span><br />
+    <span *ngIf="regForm.controls['email']?.errors?.['email'] && regForm.submitted" class="error">
+      Invalid email
+    </span><br />
+
+    <label>Mobile:</label><br />
+    <input
+      type="text"
+      name="mobile"
+      [(ngModel)]="student.mobile"
+      required
+      pattern="^[0-9]{10}$"
+    /><br />
+    <span *ngIf="regForm.submitted && !student.mobile" class="error">Mobile is required</span><br />
+    <span *ngIf="regForm.controls['mobile']?.errors?.['pattern'] && regForm.submitted" class="error">
+      Must be 10 digits
+    </span><br /><br />
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div *ngIf="submitted">
+    <h3>Registration Successful!</h3>
+    <p>Name: {{ student.name }}</p>
+    <p>Email: {{ student.email }}</p>
+    <p>Mobile: {{ student.mobile }}</p>
+  </div>
+</div>
+
+
+
+
+.container {
+  text-align: center;
+  margin-top: 40px;
+  font-family: Arial;
+}
+
+input {
+  margin: 5px;
+  padding: 4px;
+}
+
+button {
+  padding: 6px 12px;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+}
+
+
