@@ -1,0 +1,142 @@
+Q1import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
+function App() {
+  const [name,setName]=useState('');
+  return (
+    <div style={{ textAlign:'center'}}>
+      <input
+      type='text'
+      value={name}
+      onChange={(e)=>setName(e.target.value)}
+      placeholder='type your name'></input>
+      <p>HIII {name}</p>
+    </div>
+  );
+}
+
+export default App;
+
+
+Q2
+
+// ==========================================
+// # app.module.ts
+// ==========================================
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+
+// ==========================================
+// # app.component.ts
+// ==========================================
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  images: string[] = []; // to store selected images as data URLs
+  selectedImage: string = ''; // for enlarged image
+
+  // handle file selection
+  onFileSelected(event: any) {
+    const files = event.target.files;
+    for (let file of files) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.images.push(e.target.result); // store image data
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // show clicked image in large view
+  showImage(img: string) {
+    this.selectedImage = img;
+  }
+
+  // close enlarged image
+  closeImage() {
+    this.selectedImage = '';
+  }
+}
+
+
+// ==========================================
+// <!-- app.component.html -->
+// ==========================================
+/*
+<div class="container">
+  <h2>Image Gallery App</h2>
+
+  <input type="file" multiple (change)="onFileSelected($event)" />
+
+  <div class="gallery">
+    <img
+      *ngFor="let img of images"
+      [src]="img"
+      alt="Image"
+      (click)="showImage(img)"
+    />
+  </div>
+
+  <div class="preview" *ngIf="selectedImage">
+    <img [src]="selectedImage" alt="Large Image" />
+    <br />
+    <button (click)="closeImage()">Close</button>
+  </div>
+</div>
+*/
+
+
+// ==========================================
+// /* app.component.css */
+// ==========================================
+/*
+.container {
+  text-align: center;
+  font-family: Arial;
+  margin-top: 30px;
+}
+
+.gallery {
+  margin-top: 20px;
+}
+
+.gallery img {
+  width: 100px;
+  height: 100px;
+  margin: 8px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.preview img {
+  width: 300px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+*/
+
+
+
+
